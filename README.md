@@ -4,9 +4,20 @@ Last updated: 2023-01-02
 Contributors: [jacob-gg](https://github.com/jacob-gg)
 
 Contents:
-- [Branching](#branching)  
-- [Merging](#merging)  
-- [Stashing](#stashing)  
+- [Branching](#branching)
+    - [Creating a branch](#creating-a-branch)
+    - [Viewing and moving branches](#viewing-and-moving-branches)
+    - [Pushing a branch to the remote](#pushing-a-branch-to-the-remote)
+    - [Moving uncommitted work to a new branch](#moving-uncommitted-work-to-a-new-branch)
+    - [Deleting branches](#deleting-branches) 
+- [Merging](#merging)
+    - [Merging branches locally](#merging-branches-locally)
+    - [Merging branches at the remote](#merging-branches-at-the-remote)
+    - [Merge conflicts](#merge-conflicts)
+- [Stashing](#stashing)
+    - [Creating stashes](#creating-stashes)
+    - [Viewing stashes](#viewing-stashes)
+    - [Applying and deleting stashes](#applying-and-deleting-stashes)
 
 _Throughout this guide, all `code-formatted text` refers to command line commands unless otherwise indicated._
 
@@ -28,7 +39,7 @@ Branches are copies of a repository. Instead of always working together in the "
 `git branch new_branch` _then_  
 `git switch new_branch` _or_ `git checkout new_branch`
 
-### Viewing and move branches
+### Viewing and moving branches
 
 View a repository's existing branches, as well as the branch you're currently in, with:
 
@@ -49,7 +60,7 @@ Add and commit files to the branch, then:
 
 **Approach 1: Via branch commands**
 
-If you are working in a branch (e.g., the main) and want to move your uncommitted changes to a new branch, use:  
+If you are working in a branch (e.g., the main) and want to move uncommitted changes to a new branch, use:  
 
 `git switch -c new_branch`  
 _or_  
@@ -59,7 +70,7 @@ _or_
 
 Alternatively, you can use the stash (more on the stash below):
 
-First, stash your changes:  
+First, stash the changes:  
 `git stash push -u`  
 Then, make a new branch with your stashed changes:  
 `git stash branch new_branch stash@{0}`
@@ -67,9 +78,9 @@ Then, make a new branch with your stashed changes:
 Note that:
 1. `stash@{0}` is a reference to the most-recent stash
     - View all stashes with `git stash list`
-2. By default, `git stash push` will stash uncommitted changes to tracked (~= existing) files, but it will _not_ stash new files and changes thereto
+2. By default, `git stash push` will stash uncommitted changes to tracked files, but it will _not_ stash new, untracked files and changes thereto
     - To also stash new files, use `git stash push -u` (equivalent to `git stash push --include-untracked`)
-    - Assuming that you usually want to stash new files as well as changes to existing files, the command with the `-u`/`--include-untracked` option is a reasonable default
+    - Assuming that you usually want to stash new, untracked files as well as changes to existing, tracked files, the command with the `-u`/`--include-untracked` option is a reasonable default
 
 ### Deleting branches
 
@@ -77,7 +88,7 @@ Note that:
 
 `git branch -d branch_name`
 
-If you haven't merged the branch into another already, this will produce an error. To force the deletion regardless, use: `git branch -D branch_name`.
+If you haven't merged the branch into another already, this will produce an error. To force the deletion regardless, use `git branch -D branch_name`.
 
 **Deleting a branch at the remote**
 
@@ -101,7 +112,7 @@ Make sure to pull before merging to ensure that the main is up to date (`git pul
 
 ### Merging branches at the remote
 
-Prepare to merge branches at the remote by pushing a branch and then opening a pull request. The workflow might look like:
+Prepare to merge branches at the remote by pushing a branch and then opening a pull request. The workflow will generally look like:
 
 `git checkout -b new_branch`  
 _add files, make changes, etc._  
@@ -175,15 +186,18 @@ Screenshots of the process are available [here](https://docs.github.com/en/pull-
 
 Stashing is a way to temporarily save working changes and then revert (undo) those changes in your active branch. This is useful when you need to suddenly work on a different part of a repo but want to save uncommitted changes for future work.
 
+### Creating stashes
 Stash the uncommitted changes in your working directory with:
 
 `git stash push` _or_  
-`git stash push --include-untracked [-u]` to include _untracked_ (~= new) files, _or_  
+`git stash push --include-untracked [-u]` to include _untracked_ (this often means _new_) files, _or_  
 `git stash --all [-a]` to include _untracked_ and _ignored_ files
 
 Changes are stashed, and the branch you're working in is returned to the state it was in before your changes. Add the `--message[-m]` flag to include a message describing the stash entry (similar to a commit message):
 
-`git stash push -m 'testing new code for doing XYZ'`
+`git stash push -m 'testing code for doing XYZ'`
+
+### Viewing stashes
 
 View the entries in the stash with:
 
@@ -191,10 +205,12 @@ View the entries in the stash with:
 
 Entries take the form `stash@{#}`, with `stash@{0}` being the most-recent.
 
+### Applying and deleting stashes
+
 Stashed changes can be reapplied to the branch you're in with:
 
 `git stash pop` _or_  
-`git stash popo stash@{#}` to apply a specific stash (`stash@{0}` is the default)
+`git stash pop stash@{#}` to apply a specific stash (`stash@{0}` is the default)
 
 Git will attempt to apply the stashed changes. If successful, the applied stash will be deleted. If Git encounters conflicts, you'll need to resolve them manually (see "Merge conflicts" above) and then delete the stash entry:
 
