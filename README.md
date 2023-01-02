@@ -13,7 +13,7 @@ Contents:
 - [Merging](#merging)
     - [Merging branches locally](#merging-branches-locally)
     - [Merging branches at the remote](#merging-branches-at-the-remote)
-    - [Merge conflicts](#merge-conflicts)
+    - [Resolving merge conflicts](#resolving-merge-conflicts)
 - [Stashing](#stashing)
     - [Creating stashes](#creating-stashes)
     - [Viewing stashes](#viewing-stashes)
@@ -122,7 +122,7 @@ _add files, make changes, etc._
 
 Then, open a pull request on GitHub. You or someone else can then review the changes and merge the branch or request edits. Once the branch has been merged, you can safely delete it both locally and at the remote. You can delete the merged branch at the remote using GitHub's interface, or you can use the method described above under "Deleting branches." Also delete the branch locally once it's no longer in use.
 
-### Merge conflicts
+### Resolving merge conflicts
 
 Git is usually able to figure out how to merge files and changes together, but not always. If, say, two people modify the same line(s) in a file and then try to push and merge their changes, Git may encounter a merge conflict. Whether the merge conflict arose locally or at the remote influences which interface is most natural to use to resolve it.
 
