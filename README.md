@@ -176,7 +176,7 @@ Save the file, stage it, and then commit to resolve the merge conflict:
 
 If a pull request followed by a merge attempt results in a merge conflict, the issue can be resolved at the remote via a similar interface as in the local merge-conflict example above.
 
-You'll see a "Resolve conflicts" button in the GitHub interface, which will let you address conflicts as above (i.e., by deciding what lines to keep/modify and then deleting the `<<...`, `>>...` and `==...` conflict-delineation flags).
+You'll see a "Resolve conflicts" button in the GitHub interface, which will let you address conflicts as above (i.e., by deciding what lines to keep/modify and then deleting the `<<...`, `>>...`, and `==...` conflict-delineation flags).
 
 Screenshots of the process are available [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github).
 
