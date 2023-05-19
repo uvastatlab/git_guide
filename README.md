@@ -1,6 +1,6 @@
 # StatLab guide to Git branching, merging, and stashing
 
-Last updated: 2023-01-02  
+Last updated: 2023-05-19  
 Contributors: [jacob-gg](https://github.com/jacob-gg)
 
 Contents:
@@ -167,7 +167,7 @@ abcdefghij
 
 Modify the file to resolve the merge conflict: Decide which line(s) to keep or otherwise integrate them, then delete the `<<<<<<< HEAD`, `>>>>>>> new_branch`, and `=======` markers.
 
-Save the file, stage it, and them commit to resolve the merge conflict:
+Save the file, stage it, and then commit to resolve the merge conflict:
 
 `git add file.txt`  
 `git commit -am 'resolve file.txt merge conflict between main and new_branch'`
